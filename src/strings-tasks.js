@@ -179,8 +179,12 @@ function removeFirstOccurrences(str, value) {
  *   removeLastOccurrences('I like legends', 'end') => 'I like legs'.
  *   removeLastOccurrences('ABABAB', 'BA') => 'ABAB'.
  */
-function removeLastOccurrences(/* str, value */) {
-  throw new Error('Not implemented');
+function removeLastOccurrences(str, value) {
+  const index = str.lastIndexOf(value);
+  if (index !== -1) {
+    return str.slice(0, index) + str.slice(index + value.length);
+  }
+  return str;
 }
 
 /**
@@ -195,8 +199,21 @@ function removeLastOccurrences(/* str, value */) {
  *   sumOfCodes('') => 0
  *   sumOfCodes() => 0
  */
-function sumOfCodes(/* str */) {
-  throw new Error('Not implemented');
+
+function sumOfCodes(str) {
+  if (!str) {
+    return 0;
+  }
+  let myArray;
+  if (typeof str !== 'number') {
+    myArray = str.split('');
+  } else {
+    myArray = Array.from(String(str), Number);
+  }
+  const newArr = myArray.reduce((accumulator, currentValue) => {
+    return accumulator + currentValue.charCodeAt(0);
+  }, 0);
+  return newArr;
 }
 
 /**
@@ -210,10 +227,9 @@ function sumOfCodes(/* str */) {
  *   startsWith('Hello World', 'World') => false
  *   startsWith('Hello World', 'Hello') => true
  */
-function startsWith(/* str, substr */) {
-  throw new Error('Not implemented');
+function startsWith(str, substr) {
+  return str.startsWith(substr);
 }
-
 /**
  * Checks if a string ends with a specific substring.
  *
@@ -225,8 +241,8 @@ function startsWith(/* str, substr */) {
  *   endsWith('Hello World', 'World') => true
  *   endsWith('Hello World', 'Hello') => false
  */
-function endsWith(/* str, substr */) {
-  throw new Error('Not implemented');
+function endsWith(str, substr) {
+  return str.endsWith(substr);
 }
 
 /**
@@ -242,10 +258,30 @@ function endsWith(/* str, substr */) {
  *   formatTime(0, 45) => "00:45"
  *   formatTime(0, 0) => "00:00"
  */
-function formatTime(/* minutes, seconds */) {
-  throw new Error('Not implemented');
-}
+function formatTime(minutes, seconds) {
+  if (
+    !Number.isInteger(minutes) ||
+    !Number.isInteger(seconds) ||
+    minutes < 0 ||
+    seconds < 0
+  ) {
+    throw new Error(
+      'Invalid input. Minutes and seconds must be non-negative integers.'
+    );
+  }
 
+  if (minutes > 59 || seconds > 59) {
+    throw new Error(
+      'Invalid input. Minutes and seconds must be less than or equal to 59.'
+    );
+  }
+  const strMin = minutes.toString();
+  const strSec = seconds.toString();
+  const formattedMinutes = strMin.toString().padStart(2, '0');
+  const formattedSeconds = strSec.toString().padStart(2, '0');
+
+  return `${formattedMinutes}:${formattedSeconds}`;
+}
 /**
  * Returns a string in reverse order.
  *
@@ -256,8 +292,8 @@ function formatTime(/* minutes, seconds */) {
  *   reverseString('abcdef') => 'fedcba'
  *   reverseString('12345') => '54321'
  */
-function reverseString(/* str */) {
-  throw new Error('Not implemented');
+function reverseString(str) {
+  return str.split('').reverse().join('');
 }
 
 /**
