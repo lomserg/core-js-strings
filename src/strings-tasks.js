@@ -307,8 +307,10 @@ function reverseString(str) {
  *   orderAlphabetically('textbook') => 'bekoottx'
  *   orderAlphabetically('abc123xyz') => '123abcxyz'
  */
-function orderAlphabetically(/* str */) {
-  throw new Error('Not implemented');
+function orderAlphabetically(str) {
+  const newArray = str.split('').sort();
+  const result = newArray.join('');
+  return result;
 }
 
 /**
@@ -323,8 +325,8 @@ function orderAlphabetically(/* str */) {
  *   containsSubstring('JavaScript is Fun', 'Python') => false
  *   containsSubstring('12345', '34') => true
  */
-function containsSubstring(/* str, substring */) {
-  throw new Error('Not implemented');
+function containsSubstring(str, substring) {
+  return str.includes(substring);
 }
 
 /**
@@ -341,10 +343,18 @@ function containsSubstring(/* str, substring */) {
  *   countVowels('aEiOu') => 5
  *   countVowels('XYZ') => 1
  */
-function countVowels(/* str */) {
-  throw new Error('Not implemented');
+function countVowels(str) {
+  let count = 0;
+  const vowels = ['a', 'e', 'i', 'o', 'u', 'y'];
+  const letters = [...str];
+  // return number of vowels
+  for (let i = 0; i < letters.length; i += 1) {
+    if (vowels.includes(letters[i].toLowerCase())) {
+      count += 1;
+    }
+  }
+  return count;
 }
-
 /**
  * Returns true if the string is a palindrome; otherwise false.
  * https://en.wikipedia.org/wiki/Palindrome
